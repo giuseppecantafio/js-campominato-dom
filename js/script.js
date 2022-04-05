@@ -148,13 +148,22 @@ function generaCampoMinato() {
             if (bombe.includes(cellNumber)){
                 this.classList.add('sfondo-bomba');
                 this.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
-                 gameOver();
+                setTimeout(() => {  gameOver(); }, 100);
               } else {
                 this.classList.add('sfondo');
               }
         })
     }
-
+    function gameOver(){
+        let grid = document.getElementById('grid');
+        grid.innerHTML = "";
+        grid.classList.remove('wrapper');
+        grid.classList.add('text-wrapper');
+        let loser = document.createElement('h1');
+        loser.classList.add('red');
+        loser.textContent = 'Game Over :(';
+        grid.append(loser);
+    }
 }
 
 document.getElementById('bottone').addEventListener('click', generaCampoMinato);

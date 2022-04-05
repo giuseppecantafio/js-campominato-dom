@@ -83,7 +83,7 @@ main .text-wrapper {
 }
 .sfondo-bomba{
     background-color:red;
-    cursor: no;
+    cursor: no-drop;
 }
 
 /* FOOTER */
