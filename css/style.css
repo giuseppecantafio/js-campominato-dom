@@ -1,0 +1,96 @@
+/* GENERAL RULES */
+
+.bordo {
+    border: 1px solid black;
+}
+.red {
+    color: red;
+}
+
+/* HEADER */
+
+header{
+    height: 70px;
+}
+.logo-text {
+    font-size: 1.6rem;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.form-control {
+    display: inline-block !important;
+    width: auto !important;
+}
+
+/* MAIN */
+
+main {
+    background-color: lightgreen;
+    height: calc(100vh - 120px);
+    position: relative;
+    min-height: 500px;
+    overflow-y: auto;
+}
+main .wrapper {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+main .text-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.grid-facile {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    line-height: calc(400px / 10);
+    cursor: pointer;
+}
+
+.grid-medio {
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+    line-height: calc(400px / 9);
+    cursor: pointer;
+}
+
+.grid-difficile {
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+    line-height: calc(400px / 7);
+    cursor: pointer;
+}
+
+.sfondo{
+    background-color: green;
+    cursor: no-drop;
+}
+
+/* FOOTER */
+
+footer{
+    height: 50px;
+}
+footer .container{
+    height: 50px;
+}
+footer a{
+    text-decoration: none;
+    color: blue;
+}
