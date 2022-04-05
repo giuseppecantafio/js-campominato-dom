@@ -149,7 +149,6 @@ function generaCampoMinato() {
                 this.classList.add('sfondo-bomba');
                 this.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
                 gameOver();
-                setTimeout(() => { gameOver(); }, 100);
             } else {
                 this.classList.add('sfondo');
                 attempts = attempts + 1;
@@ -160,23 +159,28 @@ function generaCampoMinato() {
     }
     function gameOver() {
         let grid = document.getElementById('grid');
-        grid.innerHTML = "";
-        grid.classList.remove('wrapper');
-        grid.classList.add('text-wrapper');
         let loser = document.createElement('h1');
         loser.style.color = 'red';
         loser.innerHTML = `Game Over :( <br/> <h5>Numero di caselle cliccate: ${attempts}</h5>`;
         grid.append(loser);
+        // BONUS impostare tutte le celle su no-drop appena finisce il gioco
+        for (i = 0; i < colora.length; i++){
+            //colora[i].removeEventListener('click'); // NON FUNZIONA
+            colora[i].style.cursor = 'no-drop'; // FUNZIONA
+        }
+
     }
     function victory() {
         let grid = document.getElementById('grid');
-        grid.innerHTML = "";
-        grid.classList.remove('wrapper');
-        grid.classList.add('text-wrapper');
         let winner = document.createElement('h1')
         winner.style.color = 'green';
         winner.innerHTML = `HAI VINTO!!!! <br/> <h5>Numero di caselle cliccate: ${attempts}</h5>`;
         grid.append(winner);
+        // BONUS impostare tutte le celle su no-drop appena finisce il gioco
+        for (i = 0; i < colora.length; i++){
+            colora[i].removeEventListener('click'); // NON FUNZIONA
+            colora[i].style.cursor = 'no-drop'; // FUNZIONA
+        }
     }
 }
 
