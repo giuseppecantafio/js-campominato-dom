@@ -1,15 +1,3 @@
-/* 
-1) Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
-
-2) I numeri nella lista delle bombe non possono essere duplicati.
-
-3) In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina, altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
-
-4) La partita termina quando il giocatore clicca su una bomba o raggiunge il numero massimo possibile di numeri consentiti.
-
-5) Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba
-*/
-
 // costanti generali
 const colNumberFacile = 100;
 const colNumberMedio = 81;
@@ -32,7 +20,7 @@ const bombe = [];
 console.log(bombe);
 
 // creo variabile vuota per tentativi massimi utente - IL MASSIMO CHE POSSO FARE PER VINCERE è 100-16 o 81-16 o 49-16
-let max_attempt; 
+let max_attempt;
 
 // creo variabile per contare i tentativi massimi dell'utente
 let attempts = 0;
@@ -51,7 +39,7 @@ function generaCampoMinato() {
             let colsCreate = creaColonneFacile();
             // console.log(colsCreate);
             grid.innerHTML = colsCreate;
-            
+
         }
 
         function creaColonneFacile() {
@@ -73,6 +61,10 @@ function generaCampoMinato() {
             }
         }
         // console.log(bombe);
+
+        //imposto max attempts per il livello facile
+        max_attempt = 84;
+
     } else if (livello === 'medissimo') {
         function stampareGrigliaMedio() {
             let grid = document.getElementById('grid');
@@ -102,6 +94,10 @@ function generaCampoMinato() {
             }
         }
         // console.log(bombe);
+
+        //imposto max attempts per il livello medio
+        max_attempt = 65;
+
     } else {
         function stampareGrigliaDifficile() {
             let grid = document.getElementById('grid');
@@ -122,7 +118,8 @@ function generaCampoMinato() {
             return cols;
         }
         stampareGrigliaDifficile();
-        // inserisco i numeri casuali nell'array delle bombe, livello facile
+
+        // inserisco i numeri casuali nell'array delle bombe, livello difficile
         while (bombe.length < BOMBE_ARRAY) {
             let numeroGenerato = getRandomInt(1, colNumberDifficile);
             if (!bombe.includes(numeroGenerato)) {
@@ -130,6 +127,9 @@ function generaCampoMinato() {
             }
         }
         // console.log(bombe);
+
+        //imposto max attempts per il livello medio
+        max_attempt = 33;
     }
 
     function coloraSfondo() {
@@ -145,24 +145,38 @@ function generaCampoMinato() {
 
             let cellNumber = parseInt(this.innerText);
             // coloro le celle in base alle bombe e agli spazi safe
-            if (bombe.includes(cellNumber)){
+            if (bombe.includes(cellNumber)) {
                 this.classList.add('sfondo-bomba');
                 this.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
-                setTimeout(() => {  gameOver(); }, 100);
-              } else {
+                gameOver();
+                setTimeout(() => { gameOver(); }, 100);
+            } else {
                 this.classList.add('sfondo');
-              }
+                attempts = attempts + 1;
+            } if (attempts === max_attempt) {
+                victory();
+            }
         })
     }
-    function gameOver(){
+    function gameOver() {
         let grid = document.getElementById('grid');
         grid.innerHTML = "";
         grid.classList.remove('wrapper');
         grid.classList.add('text-wrapper');
         let loser = document.createElement('h1');
-        loser.classList.add('red');
-        loser.textContent = 'Game Over :(';
+        loser.style.color = 'red';
+        loser.innerHTML = `Game Over :( <br/> <h5>Numero di caselle cliccate: ${attempts}</h5>`;
         grid.append(loser);
+    }
+    function victory() {
+        let grid = document.getElementById('grid');
+        grid.innerHTML = "";
+        grid.classList.remove('wrapper');
+        grid.classList.add('text-wrapper');
+        let winner = document.createElement('h1')
+        winner.style.color = 'green';
+        winner.innerHTML = `HAI VINTO!!!! <br/> <h5>Numero di caselle cliccate: ${attempts}</h5>`;
+        grid.append(winner);
     }
 }
 
