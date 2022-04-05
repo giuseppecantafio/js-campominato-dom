@@ -82,8 +82,8 @@ main .text-wrapper {
     cursor: no-drop;
 }
 .sfondo-bomba{
-    background-color: lightcoral;
-    cursor: no-drop;
+    background-color:red;
+    cursor: no;
 }
 
 /* FOOTER */

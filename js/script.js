@@ -72,7 +72,7 @@ function generaCampoMinato() {
                 bombe.push(numeroGenerato)
             }
         }
-        console.log(bombe);
+        // console.log(bombe);
     } else if (livello === 'medissimo') {
         function stampareGrigliaMedio() {
             let grid = document.getElementById('grid');
@@ -93,6 +93,15 @@ function generaCampoMinato() {
             return cols;
         }
         stampareGrigliaMedio();
+
+        // inserisco i numeri casuali nell'array delle bombe, livello medio
+        while (bombe.length < BOMBE_ARRAY) {
+            let numeroGenerato = getRandomInt(1, colNumberMedio);
+            if (!bombe.includes(numeroGenerato)) {
+                bombe.push(numeroGenerato)
+            }
+        }
+        // console.log(bombe);
     } else {
         function stampareGrigliaDifficile() {
             let grid = document.getElementById('grid');
@@ -113,6 +122,14 @@ function generaCampoMinato() {
             return cols;
         }
         stampareGrigliaDifficile();
+        // inserisco i numeri casuali nell'array delle bombe, livello facile
+        while (bombe.length < BOMBE_ARRAY) {
+            let numeroGenerato = getRandomInt(1, colNumberDifficile);
+            if (!bombe.includes(numeroGenerato)) {
+                bombe.push(numeroGenerato)
+            }
+        }
+        // console.log(bombe);
     }
 
     function coloraSfondo() {
@@ -123,14 +140,15 @@ function generaCampoMinato() {
     // console.log(colora);
 
     for (let i = 0; i < colora.length; i++) {
+
         colora[i].addEventListener('click', function () {
-            // colora[i].classList.add('sfondo');
+
             let cellNumber = parseInt(this.innerText);
+            // coloro le celle in base alle bombe e agli spazi safe
             if (bombe.includes(cellNumber)){
                 this.classList.add('sfondo-bomba');
                 this.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
-                //COLLEGO FUNZIONE GAME OVER
-                // gameOver();
+                 gameOver();
               } else {
                 this.classList.add('sfondo');
               }
