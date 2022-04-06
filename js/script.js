@@ -132,16 +132,12 @@ function generaCampoMinato() {
         max_attempt = 33;
     }
 
-    function coloraSfondo() {
-        const coloraCelle = document.querySelectorAll("div.grid-difficile, div.grid-medio, div.grid-facile");
-        return coloraCelle;
-    }
-    let colora = coloraSfondo();
+    let colora = document.querySelectorAll("div.grid-difficile, div.grid-medio, div.grid-facile");
     // console.log(colora);
 
     for (let i = 0; i < colora.length; i++) {
-
-        colora[i].addEventListener('click', function () {
+         
+        function coloraCelleCliccate(){
 
             let cellNumber = parseInt(this.innerText);
             // coloro le celle in base alle bombe e agli spazi safe
@@ -155,8 +151,11 @@ function generaCampoMinato() {
             } if (attempts === max_attempt) {
                 victory();
             }
-        })
+        }
+
+        colora[i].addEventListener('click', coloraCelleCliccate);
     }
+
     function gameOver() {
         let grid = document.getElementById('grid');
         let loser = document.createElement('h1');
@@ -165,7 +164,7 @@ function generaCampoMinato() {
         grid.append(loser);
         // BONUS impostare tutte le celle su no-drop appena finisce il gioco
         for (i = 0; i < colora.length; i++){
-            //colora[i].removeEventListener('click'); // NON FUNZIONA
+            colora[i].removeEventListener('click', coloraCelleCliccate); // NON FUNZIONA
             colora[i].style.cursor = 'no-drop'; // FUNZIONA
         }
 
@@ -178,7 +177,7 @@ function generaCampoMinato() {
         grid.append(winner);
         // BONUS impostare tutte le celle su no-drop appena finisce il gioco
         for (i = 0; i < colora.length; i++){
-            colora[i].removeEventListener('click'); // NON FUNZIONA
+            colora[i].removeEventListener('click', coloraCelleCliccate); // NON FUNZIONA
             colora[i].style.cursor = 'no-drop'; // FUNZIONA
         }
     }
