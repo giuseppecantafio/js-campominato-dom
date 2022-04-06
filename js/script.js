@@ -135,24 +135,25 @@ function generaCampoMinato() {
     let colora = document.querySelectorAll("div.grid-difficile, div.grid-medio, div.grid-facile");
     // console.log(colora);
 
-    for (let i = 0; i < colora.length; i++) {
-         
-        function coloraCelleCliccate(){
+     
+    function coloraCelleCliccate(){
 
-            let cellNumber = parseInt(this.innerText);
-            // coloro le celle in base alle bombe e agli spazi safe
-            if (bombe.includes(cellNumber)) {
-                this.classList.add('sfondo-bomba');
-                this.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
-                gameOver();
-            } else {
-                this.classList.add('sfondo');
-                attempts = attempts + 1;
-            } if (attempts === max_attempt) {
-                victory();
-            }
+        let cellNumber = parseInt(this.innerText);
+        // coloro le celle in base alle bombe e agli spazi safe
+        if (bombe.includes(cellNumber)) {
+            this.classList.add('sfondo-bomba');
+            this.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
+            gameOver();
+        } else {
+            this.classList.add('sfondo');
+            attempts = attempts + 1;
+        } if (attempts === max_attempt) {
+            victory();
         }
+    }
 
+    for (let i = 0; i < colora.length; i++) {
+        
         colora[i].addEventListener('click', coloraCelleCliccate);
     }
 
